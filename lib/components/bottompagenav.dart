@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/material.dart';
 import 'package:homehunt/pages/booking.dart'; 
-import 'package:homehunt/pages/booking_status.dart';
-import 'package:homehunt/pages/home.dart'; 
+import 'package:homehunt/pages/booking_status.dart'; 
+import 'package:homehunt/pages/home.dart';
 import 'package:homehunt/pages/profile.dart';
 
 class Bottompagenav extends StatefulWidget {
-  const Bottompagenav({Key? key}) : super(key: key);
+  const Bottompagenav({super.key});
 
   @override
   State<Bottompagenav> createState() => _BottompagenavState();
@@ -14,40 +14,42 @@ class Bottompagenav extends StatefulWidget {
 
 class _BottompagenavState extends State<Bottompagenav> {
   late List<Widget> pages;
-  int currentTabIndex = 0;
+  late Home homepage;
+  late BookingStatusPage bookingStatusPage;
+  late Profile profile;
+  int currenttabindex = 0;
 
   @override
   void initState() {
     super.initState();
-    pages = [
-      Home(), // Change this to your home widget or create an instance
-      BookingStatusPage(),
-      Profile(), // Ensure this is defined
-    ];
+    homepage = Home();
+
+    bookingStatusPage = BookingStatusPage();
+    profile = Profile();
+    
+    pages = [homepage, bookingStatusPage, profile];
   }
 
   @override
   Widget build(BuildContext context) {
-    return CurvedNavigationBar(
-      height: 65,
-      backgroundColor: Colors.white,
-      color: Color.fromARGB(255, 0, 0, 0),
-      animationDuration: Duration(milliseconds: 300),
-      index: currentTabIndex,
-      items: <Widget>[
-        Icon(Icons.home, size: 30, color: Colors.white),
-        Icon(Icons.book_online, size: 30, color: Colors.white),
-        Icon(Icons.person, size: 30, color: Colors.white),
-      ],
-      onTap: (index) {
-        setState(() {
-          currentTabIndex = index;
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => pages[currentTabIndex]),
-          );
-        });
-      },
+    return Scaffold(
+      bottomNavigationBar: CurvedNavigationBar(
+        height: 65,
+        backgroundColor: Colors.white,
+        color: Color.fromARGB(255, 0, 0, 0),
+        animationDuration: Duration(milliseconds: 500),
+        onTap: (int index) {
+          setState(() {
+            currenttabindex = index;
+          });
+        },
+        items: [
+          Icon(Icons.home_outlined, color: Colors.white),
+          Icon(Icons.book_online_outlined, color: Colors.white),
+          Icon(Icons.person_2_outlined, color: Colors.white),
+        ],
+      ),
+      body: pages[currenttabindex],
     );
   }
 }

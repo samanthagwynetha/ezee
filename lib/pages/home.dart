@@ -2,11 +2,11 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:homehunt/auth/auth.dart';
 import 'package:homehunt/pages/details.dart';
 import 'package:homehunt/services/database.dart';
 import 'package:homehunt/widget/support_widget.dart';
-import 'package:homehunt/components/bottompagenav.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,6 +17,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   Stream? roomItemStream;
+
+  // Declare the selected category variable at the class level
   String selectedCategory = "Standard"; // Initialize with a default value
 
   @override
@@ -56,17 +58,7 @@ class _HomeState extends State<Home> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => Details(
-                      title: ds["Title"],
-                      description: ds["Description"],
-                      address: ds["Address"],
-                      price: ds["Price"],
-                      maxguests: ds["MaxGuests"],
-                      images: ds["Image"],
-                      status: ds["Status"],
-                    ),
-                  ),
+                  MaterialPageRoute(builder: (context) => Details(title: ds["Title"], description: ds["Description"], address: ds["Address"],price: ds["Price"], maxguests: ds["MaxGuests"], images: ds["Image"], status: ds["Status"],)),
                 );
               },
               child: Container(
@@ -102,7 +94,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-            );
+              );
           },
         );
       },
@@ -133,20 +125,7 @@ class _HomeState extends State<Home> {
             DocumentSnapshot ds = snapshot.data.docs[index];
             return GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Details(
-                      title: ds["Title"],
-                      description: ds["Description"],
-                      address: ds["Address"],
-                      price: ds["Price"],
-                      maxguests: ds["MaxGuests"],
-                      images: ds["Image"],
-                      status: ds["Status"],
-                    ),
-                  ),
-                );
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Details(title: ds["Title"], description: ds["Description"], address: ds["Address"],price: ds["Price"], maxguests: ds["MaxGuests"], images: ds["Image"], status: ds["Status"],)));
               },
               child: Container(
                 margin: EdgeInsets.all(5),
@@ -250,11 +229,10 @@ class _HomeState extends State<Home> {
             Expanded(child: allItemsVertically()), // Use Expanded for vertical list
            
             SizedBox(height: 30.0),
-        
+          
           ],
         ),
       ),
-      bottomNavigationBar: Bottompagenav(), // Use Bottompagenav here
     );
   }
 }
