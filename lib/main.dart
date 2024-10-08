@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:homehunt/admin/add_room.dart';
 import 'package:homehunt/admin/admin_home.dart';
 import 'package:homehunt/admin/admin_login.dart';
+import 'package:homehunt/admin/admin_navbar.dart';
+import 'package:homehunt/admin/admin_profile.dart';
 import 'package:homehunt/admin/admin_status.dart';
 import 'package:homehunt/auth/admin_auth.dart';
 import 'package:homehunt/auth/admin_login_only.dart';

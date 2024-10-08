@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Importing for date formatting
+import 'package:intl/intl.dart'; 
 
 class BookingStatusPage extends StatefulWidget {
   @override
@@ -28,7 +28,7 @@ class _BookingStatusPageState extends State<BookingStatusPage> {
     print("Current User ID: $userId");
 
     bookingStream = FirebaseFirestore.instance
-        .collection('Bookings') // Ensure this matches your Firestore collection
+        .collection('Bookings') 
         .where('UserID', isEqualTo: userId)
         .snapshots();
   }
@@ -50,7 +50,7 @@ class _BookingStatusPageState extends State<BookingStatusPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Booking Status'),
-        backgroundColor: Colors.teal, // AppBar color
+        backgroundColor: Colors.teal,
       ),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: bookingStream,
@@ -81,7 +81,7 @@ class _BookingStatusPageState extends State<BookingStatusPage> {
               DocumentSnapshot<Map<String, dynamic>> booking = snapshot.data!.docs[index];
               return Card(
                 margin: EdgeInsets.all(10),
-                elevation: 4, // Shadow effect
+                elevation: 4, 
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
@@ -105,7 +105,7 @@ class _BookingStatusPageState extends State<BookingStatusPage> {
                           ),
                         ),
                       ),
-                      // Conditional rendering of the cancel button
+   
                       if (booking['Status'] == 'Pending')
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -116,7 +116,7 @@ class _BookingStatusPageState extends State<BookingStatusPage> {
                               },
                               child: Text("Cancel"),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red, // Set button color to red
+                                backgroundColor: Colors.red, 
                               ),
                             ),
                           ],

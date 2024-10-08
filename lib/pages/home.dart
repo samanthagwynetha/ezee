@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
   Stream? roomItemStream;
 
   // Declare the selected category variable at the class level
-  String selectedCategory = "Standard"; // Initialize with a default value
+  String selectedCategory = "Standard"; 
 
   @override
   void initState() {
@@ -30,7 +30,7 @@ class _HomeState extends State<Home> {
   onLoad() async {
     // Load initial data for the selected category
     roomItemStream = await DatabaseMethods().getRoomItem(selectedCategory);
-    setState(() {}); // Refresh UI
+    setState(() {}); 
   }
 
   Widget allItemsVertically() {
@@ -84,7 +84,7 @@ class _HomeState extends State<Home> {
                             children: [
                               Text(ds["Title"], style: Appwidget.semiboldtextfieldstyle()),
                               SizedBox(height: 10),
-                              // Convert Price to String if it is an int
+                  
                               Text("\₱" + ds["Price"].toString(), style: Appwidget.semiboldtextfieldstyle()),
                             ],
                           ),
@@ -147,7 +147,7 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Text(ds["Title"], style: Appwidget.semiboldtextfieldstyle()),
-                        // Convert Price to String if it is an int
+
                         Text("\₱" + ds["Price"].toString(), style: Appwidget.semiboldtextfieldstyle()),
                       ],
                     ),
@@ -161,13 +161,12 @@ class _HomeState extends State<Home> {
     );
   }
 
-  // Method to create category buttons
   Widget buildCategoryButton(String category) {
     return GestureDetector(
       onTap: () {
         setState(() {
-          selectedCategory = category; // Update selected category
-          onLoad(); // Fetch new data for the selected category
+          selectedCategory = category; 
+          onLoad(); 
         });
       },
       child: Container(
@@ -226,7 +225,7 @@ class _HomeState extends State<Home> {
             Container(height: 280, child: allItems()),
 
             SizedBox(height: 30.0),
-            Expanded(child: allItemsVertically()), // Use Expanded for vertical list
+            Expanded(child: allItemsVertically()), 
            
             SizedBox(height: 30.0),
           

@@ -19,8 +19,8 @@ class BookingPage extends StatefulWidget {
 class _BookingPageState extends State<BookingPage> {
   DateTime? checkInDate;
   DateTime? checkOutDate;
-  XFile? imageFile; // For mobile
-  Uint8List? imageBytes; // For web
+  XFile? imageFile; 
+  Uint8List? imageBytes; 
   final ImagePicker _picker = ImagePicker();
 
   Future<void> _selectDate(BuildContext context, bool isCheckIn) async {

@@ -212,7 +212,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
             SizedBox(height: 30.0),
             Expanded(child: _buildRoomItemList()), // Display vertical list of room items
             SizedBox(height: 30.0),
-            _buildLogoutTile(),
+
           ],
         ),
       ),
@@ -226,17 +226,5 @@ class _AdminDashboardState extends State<AdminDashboard> {
     );
   }
 
-  Widget _buildLogoutTile() {
-    return Padding(
-      padding: EdgeInsets.only(left: 25.0),
-      child: ListTile(
-        leading: Icon(Icons.logout, color: Theme.of(context).colorScheme.inversePrimary),
-        title: Text("L O G O U T"),
-        onTap: () async {
-          await FirebaseAuth.instance.signOut();
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AuthPage()));
-        },
-      ),
-    );
-  }
+
 }

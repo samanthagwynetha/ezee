@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:homehunt/admin/admin_navbar.dart';
+import 'package:homehunt/auth/auth.dart';
 import 'package:homehunt/components/button.dart';
 import 'package:homehunt/components/textfield.dart';
 import 'package:homehunt/helper/helperfunction.dart';
@@ -45,7 +47,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
             Navigator.pop(context); // Close loading indicator
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => AdminDashboard()),
+              MaterialPageRoute(builder: (context) => AdminNavbar()),
             );
           } else {
             // Password is incorrect
@@ -81,6 +83,22 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person_outline_sharp),
+            onPressed: () {
+              // Navigate to Customer
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AuthPage()),
+              );
+            },
+          ),
+        ],
+      ),
       backgroundColor: const Color(0xFFededeb),
       body: Center(
         child: Padding(

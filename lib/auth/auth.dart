@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:homehunt/auth/login_or_register.dart';
 import 'package:homehunt/components/bottompagenav.dart';
 import 'package:homehunt/pages/home.dart';
-// import 'package:ventspace/auth/login_or_register.dart';
-// import '../pages/home_page.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -15,6 +13,7 @@ class AuthPage extends StatelessWidget {
       body: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
+          
           //user is logged in
           if (snapshot.hasData) {
             return Bottompagenav();

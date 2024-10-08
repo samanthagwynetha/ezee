@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Import the intl package
+import 'package:intl/intl.dart';
 
 class AdminBookingStatus extends StatefulWidget {
   @override
@@ -17,20 +16,33 @@ class _AdminBookingStatusState extends State<AdminBookingStatus> {
     fetchBookings();
   }
 
+  // Fetch all bookings
   void fetchBookings() {
     bookingStream = FirebaseFirestore.instance
-        .collection('Bookings') // Ensure this matches your collection name
+        .collection('Bookings')
         .snapshots();
   }
 
+  // Update or delete booking based on the status
   Future<void> updateBookingStatus(String bookingId, String newStatus) async {
     try {
-      await FirebaseFirestore.instance
-          .collection('Bookings')
-          .doc(bookingId)
-          .update({'Status': newStatus});
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Booking status updated to $newStatus")));
+      if (newStatus == 'Rejected') {
+        // Delete booking if rejected
+        await FirebaseFirestore.instance
+            .collection('Bookings')
+            .doc(bookingId)
+            .delete();
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Booking has been rejected and removed.")));
+      } else {
+        // Update status for other cases
+        await FirebaseFirestore.instance
+            .collection('Bookings')
+            .doc(bookingId)
+            .update({'Status': newStatus});
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Booking status updated to $newStatus")));
+      }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Failed to update status: $e")));
@@ -95,6 +107,7 @@ class _AdminBookingStatusState extends State<AdminBookingStatus> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          // Dropdown to change status
                           DropdownButton<String>(
                             value: booking['Status'],
                             items: <String>['Pending', 'Approved', 'Rejected']
@@ -106,19 +119,10 @@ class _AdminBookingStatusState extends State<AdminBookingStatus> {
                             }).toList(),
                             onChanged: (String? newValue) {
                               if (newValue != null && newValue != booking['Status']) {
+                                // Call update function when status is changed
                                 updateBookingStatus(booking.id, newValue);
                               }
                             },
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              if (booking['Status'] != 'Pending') {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text("Only pending bookings can be updated.")),
-                                );
-                              }
-                            },
-                            child: Text("Update Status"),
                           ),
                         ],
                       ),

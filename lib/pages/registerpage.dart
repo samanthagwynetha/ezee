@@ -142,16 +142,16 @@ class _RegisterPageState extends State<RegisterPage> {
 
             const SizedBox(height: 10),
 
-            //forgot password
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text("Forgot Password?", 
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.inversePrimary),
-                ),
-              ],
-            ),
+            // //forgot password
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [
+            //     Text("Forgot Password?", 
+            //     style: TextStyle(
+            //       color: Theme.of(context).colorScheme.inversePrimary),
+            //     ),
+            //   ],
+            // ),
 
             const SizedBox(height: 25),
 

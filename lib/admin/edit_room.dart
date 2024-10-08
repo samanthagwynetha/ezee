@@ -61,16 +61,15 @@ class _EditRoomScreenState extends State<EditRoomScreen> {
     final image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       setState(() {
-        selectedImage = File(image.path); // Keep this for mobile
-        selectedImageBytes = null; // Clear web bytes for mobile
+        selectedImage = File(image.path); 
+        selectedImageBytes = null; 
       });
 
-      // Convert to Uint8List for web display
       if (kIsWeb) {
         final bytes = await image.readAsBytes();
         setState(() {
-          selectedImage = null; // Clear the file for web usage
-          selectedImageBytes = bytes; // Store the bytes for display
+          selectedImage = null; 
+          selectedImageBytes = bytes; 
         });
       }
     } else {
